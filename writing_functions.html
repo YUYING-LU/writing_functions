@@ -380,11 +380,11 @@ display: none;
 <p>as an example, here’s a z-score computation</p>
 <pre class="r"><code>x_vec = rnorm(n=25, mean = 10, sd = 3.5)
 (x_vec - mean(x_vec)) / sd(x_vec)</code></pre>
-<pre><code>##  [1]  0.743140231  0.993073209  0.663248607 -1.377782391 -1.129788167
-##  [6]  0.332047194  0.153202564  0.738077635 -0.202922314 -1.849569585
-## [11]  0.005496414  0.389410733  0.822021645 -1.154627611 -1.981423287
-## [16]  1.920787015  0.852458594  0.106328748  0.866523313  0.231282045
-## [21] -1.619276403  0.017267406 -0.239226598  0.833964880 -0.113713875</code></pre>
+<pre><code>##  [1] -0.05798884 -0.51528484  1.21752581 -0.49937531 -0.77726772 -1.45329055
+##  [7]  0.12586536 -0.01675479  0.19238663  1.02430465  0.89785543 -1.06912186
+## [13]  1.49630704 -0.31793114  0.34751121 -0.93176261 -0.15816182 -1.10414703
+## [19]  0.80517100  1.51709310 -1.37353770  1.80824642  0.79415750 -0.26285108
+## [25] -1.68894886</code></pre>
 <p>Now I’ll write a function to do this:</p>
 <pre class="r"><code>z_scores = function(x){
   if (!is.numeric(x)){
@@ -398,11 +398,11 @@ display: none;
 }
 
 z_scores(x_vec)</code></pre>
-<pre><code>##  [1]  0.743140231  0.993073209  0.663248607 -1.377782391 -1.129788167
-##  [6]  0.332047194  0.153202564  0.738077635 -0.202922314 -1.849569585
-## [11]  0.005496414  0.389410733  0.822021645 -1.154627611 -1.981423287
-## [16]  1.920787015  0.852458594  0.106328748  0.866523313  0.231282045
-## [21] -1.619276403  0.017267406 -0.239226598  0.833964880 -0.113713875</code></pre>
+<pre><code>##  [1] -0.05798884 -0.51528484  1.21752581 -0.49937531 -0.77726772 -1.45329055
+##  [7]  0.12586536 -0.01675479  0.19238663  1.02430465  0.89785543 -1.06912186
+## [13]  1.49630704 -0.31793114  0.34751121 -0.93176261 -0.15816182 -1.10414703
+## [19]  0.80517100  1.51709310 -1.37353770  1.80824642  0.79415750 -0.26285108
+## [25] -1.68894886</code></pre>
 <p>does this always work?</p>
 <pre class="r"><code>z_scores(x = 3)</code></pre>
 <pre><code>## Error in z_scores(x = 3): you need at least five numbers to compute the z score</code></pre>
@@ -425,7 +425,7 @@ mean_and_sd(x_vec)</code></pre>
 <pre><code>## # A tibble: 1 × 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  10.2  3.47</code></pre>
+## 1  10.6  3.58</code></pre>
 </div>
 <div id="check-stuff-using-a-simulation" class="section level2">
 <h2>Check stuff using a simulation</h2>
@@ -442,7 +442,7 @@ sim_df |&gt;
 <pre><code>## # A tibble: 1 × 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  9.81  4.95</code></pre>
+## 1  10.0  4.43</code></pre>
 </div>
 <div id="simulation-function-to-check-sample-mean-and-sd." class="section level2">
 <h2>Simulation function to check sample mean and sd.</h2>
@@ -465,27 +465,27 @@ sim_mean_sd(sample_size = 3000, true_mean = 4, true_sd = 12)</code></pre>
 <pre><code>## # A tibble: 1 × 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  3.78  12.1</code></pre>
+## 1  4.18  12.0</code></pre>
 <pre class="r"><code>sim_mean_sd(true_mean = 4, true_sd = 12, sample_size = 3000)</code></pre>
 <pre><code>## # A tibble: 1 × 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  3.87  12.0</code></pre>
+## 1  4.08  12.1</code></pre>
 <pre class="r"><code>sim_mean_sd(3000, 4, 12)</code></pre>
 <pre><code>## # A tibble: 1 × 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  3.80  12.0</code></pre>
+## 1  4.32  11.7</code></pre>
 <pre class="r"><code>sim_mean_sd(3000,,4)</code></pre>
 <pre><code>## # A tibble: 1 × 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  9.95  4.06</code></pre>
+## 1  9.87  4.01</code></pre>
 <pre class="r"><code>sim_mean_sd(3000,4)</code></pre>
 <pre><code>## # A tibble: 1 × 2
 ##    mean    sd
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  4.01  4.87</code></pre>
+## 1  3.93  4.87</code></pre>
 <pre class="r"><code>fellowship_df = readxl::read_excel(&quot;LotR_Words.xlsx&quot;, range = &quot;B3:D6&quot;) |&gt;
   mutate(movie = &quot;fellowship_ring&quot;)
 
@@ -592,16 +592,7 @@ data_marj</code></pre>
 ##  9 Alabama 18+   2013-2014    9.99
 ## 10 Alabama 18+   2014-2015    9.59
 ## # ℹ 500 more rows</code></pre>
-<pre class="r"><code>nsduh_table_format = function(table_order, drug_name){
-  out_table = 
-    nsduh_html |&gt; 
-    html_table() |&gt; 
-    nth(table_order) |&gt;
-    slice(-1) |&gt; 
-    mutate(drug = drug_name)
-  return(out_table)
-}
-
+<pre class="r"><code>source(&#39;nsduh_table_format.R&#39;)
 nsduh_table_format(1,&#39;marj&#39;)</code></pre>
 <pre><code>## # A tibble: 56 × 17
 ##    State     `12+(2013-2014)` `12+(2014-2015)` `12+(P Value)` `12-17(2013-2014)`

@@ -178,16 +178,8 @@ data_marj
 ```
 
 ```{r}
-nsduh_table_format = function(table_order, drug_name){
-  out_table = 
-    nsduh_html |> 
-    html_table() |> 
-    nth(table_order) |>
-    slice(-1) |> 
-    mutate(drug = drug_name)
-  return(out_table)
-}
 
+source('nsduh_table_format.R')
 nsduh_table_format(1,'marj')
 nsduh_table_format(4,'cocaine')
 nsduh_table_format(5,'herion')
