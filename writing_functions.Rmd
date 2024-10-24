@@ -116,7 +116,7 @@ two_towers_df = readxl::read_excel("LotR_Words.xlsx", range = "F3:H6") |>
 return_king_df = readxl::read_excel("LotR_Words.xlsx", range = "J3:L6") |>
   mutate(movie = "return_king")
 
-lotr_tidy = bind_rows(fellowship_ring, two_towers, return_king) |>
+lotr_tidy = bind_rows(fellowship_df, two_towers_df, return_king_df) |>
   janitor::clean_names() |>
   pivot_longer(
     female:male,
@@ -124,6 +124,9 @@ lotr_tidy = bind_rows(fellowship_ring, two_towers, return_king) |>
     values_to = "words") |> 
   mutate(race = str_to_lower(race)) |> 
   select(movie, everything()) 
+
+
+lotr_tidy
 ```
 
 
@@ -185,8 +188,8 @@ nsduh_table_format = function(table_order, drug_name){
   return(out_table)
 }
 
-html_table(,1,'marj')
-html_table(4,'cocaine')
-html_table(5,'herion')
+nsduh_table_format(1,'marj')
+nsduh_table_format(4,'cocaine')
+nsduh_table_format(5,'herion')
 ```
 
